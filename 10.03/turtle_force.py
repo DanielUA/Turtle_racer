@@ -8,17 +8,15 @@ COLORS = [
     "green", "cyan", "brown", "purple", "pink"
     ]
 
-def race(turtle):
-    turtles = create_turtles(colors)
-
+def race(turtles):
     while True:
-        for racer in turtles:
-            distance = random.randrange(1,20)   
+        for i, racer in enumerate(turtles):
+            distance = random.randrange(1, 20)
             racer.forward(distance)
 
-            x,y = racer.pos()
-            if y >= HEIGHT // 2-10:
-                return colors[turtles.index(racer)]
+            x, y = racer.pos()
+            if y >= HEIGHT // 2 - 10:
+                return i
             
 def create_turtles(colors):
     turtles = []
@@ -62,8 +60,10 @@ init_turtle()
 
 random.shuffle(COLORS)
 colors = COLORS[:racers]
-winner = race(colors)
-print("Winner colour is: ", winner)
+turtles = create_turtles(colors)
+winner_index = race(turtles)
+winner_color = colors[winner_index]
+print("Winner colour is: ", winner_color)
 time.sleep(5)
 
 
